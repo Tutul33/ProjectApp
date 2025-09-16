@@ -1,0 +1,82 @@
+# =====================
+# Python artifacts
+# =====================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# =====================
+# Distribution / packaging
+# =====================
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+*.whl
+pip-wheel-metadata/
+
+# =====================
+# Virtual environments
+# =====================
+venv/
+env/
+ENV/
+.venv/
+.python-version
+
+# =====================
+# PyInstaller
+# =====================
+#  Usually these files are written by a python script from a template
+*.manifest
+*.spec
+
+# =====================
+# Test / coverage reports
+# =====================
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# =====================
+# Jupyter Notebook
+# =====================
+.ipynb_checkpoints
+
+# =====================
+# Logs and databases
+# =====================
+*.log
+*.sqlite3
+*.db
+
+# =====================
+# IDE / Editor files
+# =====================
+# VS Code
+.vscode/
+# PyCharm
+.idea/
+*.iml
+
+# =====================
+# OS-specific files
+# =====================
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
