@@ -5,7 +5,7 @@ from app.core.middlewares.exception_handler import global_exception_handler
 from app.presentation.controllers import login_controller, user_controller
 from app.infrastructure.db.base import Base, engine
 import logging
-
+from app.config import settings
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 

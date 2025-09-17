@@ -15,11 +15,11 @@ class Settings(BaseSettings):
     # ==============================
     # SQL Server
     # ==============================
-    SQLSERVER_HOST: str = "DESKTOP-A3JE4DR\\SQLDEV"
-    SQLSERVER_PORT: int = 1433
-    SQLSERVER_DB: str = "SonaliDB"
-    SQLSERVER_USER: str = "sa"
-    SQLSERVER_PASSWORD: str = "Sli@2025#"
+    SQLSERVER_HOST: str = ""
+    SQLSERVER_PORT: int = 0
+    SQLSERVER_DB: str = ""
+    SQLSERVER_USER: str = ""
+    SQLSERVER_PASSWORD: str = ""
     SQLSERVER_DRIVER: str = "ODBC Driver 18 for SQL Server"
 
     # ==============================
@@ -101,11 +101,18 @@ class Settings(BaseSettings):
         #     f"mssql+aioodbc://{self.SQLSERVER_USER}:{password}@{host}/{self.SQLSERVER_DB}"
         #     f"?driver={driver}&TrustServerCertificate=yes"
         # )
-        user = "sa"
-        password = quote_plus("Sli@2025#")  # URL-encode special characters
-        host = "DESKTOP-A3JE4DR\\SQLDEV"    # double backslash
-        db = "SonaliDB"
-        driver = quote_plus("ODBC Driver 18 for SQL Server")
+        
+        # user = "sa"
+        # password = quote_plus("Sli@2025#")  # URL-encode special characters
+        # host = "DESKTOP-A3JE4DR\\SQLDEV"    # double backslash
+        # db = "SonaliDB"
+        # driver = quote_plus("ODBC Driver 18 for SQL Server")
+        
+        user = self.SQLSERVER_USER
+        password = quote_plus(self.SQLSERVER_PASSWORD)  # handle special characters
+        host = self.SQLSERVER_HOST
+        db = self.SQLSERVER_DB
+        driver = quote_plus(self.SQLSERVER_DRIVER)
         
         return (
            f"mssql+aioodbc://{user}:{password}@{host}/{db}"
