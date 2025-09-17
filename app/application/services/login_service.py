@@ -1,5 +1,6 @@
 #login_service.py
 from typing import Optional
+from app.domain.dtos.UserLoginResponse import UserLoginResponse
 from app.domain.dtos.UserLogin import UserLogin
 from app.domain.entities.user import User
 from app.domain.interfaces.i_login_service import ILoginService
@@ -18,8 +19,16 @@ class LoginService(ILoginService):
             return None
         return user
 
-    async def login(self, login_data: UserLogin) -> Optional[str]:
-        user = await self.authenticate_user(login_data.username, login_data.password)
+    async def login(self, login_data: UserLogin) -> Optional[UserLoginResponse]:
+        # Authenticate user
+        user = await self.authenticate_user(
+            login_data.username, login_data.password
+        )
         if not user:
             return None
-        return create_access_token({"sub": user.username})
+
+        # Create token
+        token = create_access_token({"sub": user.username})
+
+        # Return DTO
+        return UserLoginResponse(user=user, token=token)

@@ -1,7 +1,7 @@
 #login_repository.py
 from sqlalchemy import select
 from app.infrastructure.db.base import async_session
-from app.infrastructure.db.models import User as UserModel
+from app.infrastructure.db.models.user import User as UserModel
 from app.infrastructure.interfaces.i_login_repository import ILoginRepository
 from app.domain.entities.user import User
 

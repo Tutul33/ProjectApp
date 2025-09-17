@@ -18,3 +18,9 @@ class IUserRepository(ABC):
     @abstractmethod
     async def list_all_users(self) -> List[User]:
         pass
+    
+    @abstractmethod
+    async def get_by_username_or_email(self, username: str, email: str) -> Optional[User]:
+        """Get a user by username or email (for duplicate checking)."""
+        pass
+
