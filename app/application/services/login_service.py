@@ -1,7 +1,7 @@
 #login_service.py
 from typing import Optional
-from app.domain.dtos.UserLoginResponse import UserLoginResponse
-from app.domain.dtos.UserLogin import UserLogin
+from app.domain.dtos.user.UserLoginResponse import UserLoginResponse
+from app.domain.dtos.user.UserLogin import UserLogin
 from app.domain.entities.user import User
 from app.domain.interfaces.i_login_service import ILoginService
 from app.infrastructure.interfaces.i_login_repository import ILoginRepository

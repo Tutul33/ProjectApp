@@ -1,8 +1,8 @@
 # app/application/services/user_service.py
 from typing import List, Optional
 from app.domain.entities.user import User
-from app.domain.dtos.UserCreate import UserCreate
-from app.domain.dtos.UserResponse import UserResponse
+from app.domain.dtos.user.UserCreate import UserCreate
+from app.domain.dtos.user.UserResponse import UserResponse
 from app.domain.interfaces.i_user_service import IUserService
 from app.infrastructure.interfaces.i_user_repository import IUserRepository
 from app.application.mappers.user_mapper import entity_to_response, entities_to_responses

@@ -2,7 +2,7 @@
 from abc import ABC, abstractmethod
 from typing import List, Optional
 from app.domain.entities.user import User
-from app.domain.dtos.UserCreate import UserCreate
+from app.domain.dtos.user.UserCreate import UserCreate
 
 class IUserService(ABC):
     """Interface for user-related business logic"""

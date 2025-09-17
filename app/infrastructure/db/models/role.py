@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Boolean, Column, Integer, String
 
 from app.infrastructure.db.base import Base
 
@@ -8,3 +8,4 @@ class Role(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(50), nullable=False)
+    isActive = Column("IsActive",Boolean, nullable=False,default=True) 

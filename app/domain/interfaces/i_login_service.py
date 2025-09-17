@@ -2,7 +2,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional
 from app.domain.entities.user import User
-from app.domain.dtos.UserLogin import UserLogin
+from app.domain.dtos.user.UserLogin import UserLogin
 
 class ILoginService(ABC):
     """Interface for login business logic"""

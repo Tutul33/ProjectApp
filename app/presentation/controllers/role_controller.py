@@ -1,5 +1,6 @@
 # app/presentation/user_controller.py
 from fastapi import APIRouter, Depends, HTTPException
+from typing import List
 from app.domain.dtos.user.UserCreate import UserCreate
 from app.application.services.user_service import UserService
 from app.core.dependencies import get_user_service

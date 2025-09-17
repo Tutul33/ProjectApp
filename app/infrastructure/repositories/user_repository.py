@@ -5,7 +5,7 @@ from app.infrastructure.db.models.user import User as UserModel
 from app.infrastructure.interfaces.i_user_repository import IUserRepository
 from app.domain.entities.user import User
 from app.core.security import hash_password
-from app.domain.dtos.UserCreate import UserCreate
+from app.domain.dtos.user.UserCreate import UserCreate
 
 class UserRepository(IUserRepository):
     """Concrete repository for user management"""

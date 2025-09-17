@@ -1,6 +1,6 @@
 #login_controller.py
 from fastapi import APIRouter, Depends, HTTPException
-from app.domain.dtos.UserLogin import UserLogin
+from app.domain.dtos.user.UserLogin import UserLogin
 from app.application.services.login_service import LoginService
 from app.core.dependencies import get_login_service
 from app.utilities.response_utils import wrap_response
