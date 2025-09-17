@@ -1,8 +1,8 @@
-# Sonali.API – FastAPI Web API (Clean Architecture)
+# ProjectApp – FastAPI Web API (Clean Architecture)
 
 ## 📌 Overview
 
-**Sonali.API (Python)** is a **FastAPI Web API** project following **Clean Architecture** principles.  
+**ProjectApp (Python)** is a **FastAPI Web API** project following **Clean Architecture** principles.  
 It separates concerns into distinct layers for **maintainability, scalability, and testability**.
 
 - **Domain Layer** – Core business entities, Pydantic schemas, interfaces, and validation.
@@ -18,7 +18,7 @@ This architecture ensures separation of concerns, CQRS pattern adoption, and fle
 ## 🏗️ Project Structure
 
 ```
-Sonali.API/
+ProjectApp/
 │── app/
 │   ├── main.py                → FastAPI entry point
 │   ├── routes/                → API endpoints
@@ -28,22 +28,22 @@ Sonali.API/
 │   ├── dependencies.py        → Dependency injection
 │   └── config.py              → App configuration (DB, JWT, etc.)
 
-Sonali.API/domain/
+ProjectApp/domain/
 │── entities/                  → Business entities (SQLAlchemy models or Pydantic schemas)
 │── schemas/                   → Pydantic DTOs
 │── interfaces/                → Service/repository interfaces
 │── validators/                → Validation logic
 
-Sonali.API/domain_service/
+ProjectApp/domain_service/
 │── base/                      → Base query services
 │── repositories/              → Raw SQL / optimized read queries
 │── interfaces/                → Query contracts
 
-Sonali.API/infrastructure/dal/
-│── base/                      → Base repository classes
+ProjectApp/infrastructure/
+│── db/                        → Base repository classes
 │── repositories/              → ORM repositories for writes
 
-Sonali.API/utilities/
+ProjectApp/utilities/
 │── helpers/                   → Utility/helper functions
 │── jwt_utils.py               → JWT token generation/validation
 │── extensions.py              → Common extensions/utilities
@@ -77,7 +77,7 @@ Sonali.API/utilities/
 ```bash
 # Clone repository
 git clone <your-repo-url>
-cd Sonali.API
+cd ProejctApp
 
 # Create virtual environment
 python -m venv venv

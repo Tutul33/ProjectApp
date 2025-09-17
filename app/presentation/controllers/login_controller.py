@@ -1,13 +1,17 @@
-from fastapi import APIRouter, HTTPException
-from app.domain.dtos.UserLogin  import UserLogin
+#login_controller.py
+from fastapi import APIRouter, Depends, HTTPException
+from app.domain.dtos.UserLogin import UserLogin
 from app.application.services.login_service import LoginService
+from app.core.dependencies import get_login_service
 
-router = APIRouter(prefix="/api/auth", tags=["Auth"])
-login_service = LoginService()
+router = APIRouter()
 
 @router.post("/login")
-async def login_user(user: UserLogin):
-    auth_user = await login_service.authenticate_user(user.username, user.password)
-    if not auth_user:
+async def login_user(
+    user_login: UserLogin,
+    login_service: LoginService = Depends(get_login_service)
+):
+    token = await login_service.login(user_login)
+    if not token:
         raise HTTPException(status_code=400, detail="Invalid username or password")
-    return {"message": "Login successful", "username": auth_user.username}
+    return {"message": "Login successful", "access_token": token}

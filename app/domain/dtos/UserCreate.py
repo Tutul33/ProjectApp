@@ -1,7 +1,7 @@
-from pydantic import BaseModel
-
+#UserCreate.py
+from pydantic import BaseModel, EmailStr
 
 class UserCreate(BaseModel):
     username: str
     password: str
-    email: str
+    email: EmailStr | None = None
