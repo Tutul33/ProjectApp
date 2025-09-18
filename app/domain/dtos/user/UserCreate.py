@@ -5,7 +5,7 @@ class UserCreate(BaseModel):
     username: str
     password: str
     email: Optional[EmailStr] = None
-    roleId: Optional[int] = None  # Optional role assignment
+    roleId: Optional[str] = None  # Optional role assignment
     isActive: bool = True          # Default active
 
     model_config = {

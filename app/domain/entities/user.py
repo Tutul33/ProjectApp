@@ -6,7 +6,7 @@ class User:
 
     def __init__(
         self,
-        id: int,
+        id: str,
         username: str,
         hashed_password: str,
         email: Optional[str] = None,

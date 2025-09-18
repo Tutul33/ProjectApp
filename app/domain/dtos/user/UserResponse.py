@@ -3,7 +3,7 @@ from typing import Optional
 from datetime import datetime
 
 class UserResponse(BaseModel):
-    id: int
+    id: str
     username: str
     email: Optional[EmailStr] = None
     roleId: Optional[int] = None

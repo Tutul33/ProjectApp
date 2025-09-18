@@ -119,11 +119,17 @@ class Settings(BaseSettings):
            f"?driver={driver}&TrustServerCertificate=yes" 
         )
         
+    # @property
+    # def MONGO_URI(self) -> str:
+    #     if self.MONGO_USER:
+    #         return f"mongodb://{self.MONGO_USER}:{self.MONGO_PASSWORD}@{self.MONGO_HOST}:{self.MONGO_PORT}/{self.MONGO_DB}"
+    #     return f"mongodb://{self.MONGO_HOST}:{self.MONGO_PORT}/{self.MONGO_DB}"
     @property
     def MONGO_URI(self) -> str:
         if self.MONGO_USER:
-            return f"mongodb://{self.MONGO_USER}:{self.MONGO_PASSWORD}@{self.MONGO_HOST}:{self.MONGO_PORT}/{self.MONGO_DB}"
+            return f"mongodb://{self.MONGO_USER}:{self.MONGO_PASSWORD}@{self.MONGO_HOST}:{self.MONGO_PORT}/{self.MONGO_DB}?authSource=admin"
         return f"mongodb://{self.MONGO_HOST}:{self.MONGO_PORT}/{self.MONGO_DB}"
+
 
     @property
     def JWT_ACCESS_TOKEN_EXPIRE(self) -> timedelta:

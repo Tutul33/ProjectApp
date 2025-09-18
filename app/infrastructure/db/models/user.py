@@ -7,11 +7,11 @@ class User(Base):
     __tablename__ = "Users"
     __table_args__ = {"schema": "dbo"}
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    id = Column(String(50), primary_key=True)
     username = Column("UserName", String(50), nullable=False)
     hashed_password = Column("Hashed_Password", String(100), nullable=False)
     email = Column("Email", String(50), nullable=True)
-    roleId = Column("RoleId", Integer, ForeignKey("dbo.Roles.id"), nullable=False)
+    roleId = Column("RoleId", String(50), ForeignKey("dbo.Roles.id"), nullable=False)
     createDate = Column("CreateDate", DateTime(timezone=True), nullable=False, default=lambda: datetime.now(timezone.utc))
     isActive = Column("IsActive", Boolean, nullable=False, default=True)
 

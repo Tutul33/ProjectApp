@@ -29,7 +29,7 @@ async def lifespan(app: FastAPI):
 
 # Create FastAPI app with lifespan
 app = FastAPI(title="Fast API", lifespan=lifespan)
-
+print(settings.MONGO_URI)
 # Global exception handler
 app.add_exception_handler(Exception, global_exception_handler) 
 

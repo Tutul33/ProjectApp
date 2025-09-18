@@ -2,7 +2,8 @@
 from pydantic import BaseModel
 
 class RoleResponse(BaseModel):
-    id: int
+    #id: int #SQL
+    id: str #Mongo
     name: str    
     isActive: bool
 

@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List, Optional
+from typing import Dict, List, Optional
 from app.domain.entities.role import Role
 
 class IRoleRepository(ABC):
@@ -23,4 +23,9 @@ class IRoleRepository(ABC):
     @abstractmethod
     async def get_by_name(self, name: str) -> Optional[Role]:
         """Get a role by name (for duplicate checking)."""
+        pass
+    
+    @abstractmethod
+    async def list_roles( self, page: int = 1, page_size: int = 10, sort_field: str = "name", ascending: bool = True) -> Dict[str, any]:
+        """Fetch all roles."""
         pass
