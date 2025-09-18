@@ -6,7 +6,7 @@ class UserResponse(BaseModel):
     id: str
     username: str
     email: Optional[EmailStr] = None
-    roleId: Optional[int] = None
+    roleId: Optional[str] = None
     createDate: datetime
     isActive: bool
 

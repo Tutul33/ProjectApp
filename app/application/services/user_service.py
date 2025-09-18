@@ -24,10 +24,10 @@ class UserService(IUserService):
             raise AlreadyExistsException(f"Username or email already taken: {user_data.username}")
         
         # DTO → Domain Entity
-        role_entity: User = map_to_entity(User, user_data)
+        user_entity: User = map_to_entity(User, user_data)
         
         # Persist domain entity
-        saved_user: User = await self.repo.add_user(role_entity)
+        saved_user: User = await self.repo.add_user(user_entity)
         
         # Domain Entity → DTO
         return map_to_dto(UserResponse, saved_user)

@@ -6,9 +6,10 @@ class User:
 
     def __init__(
         self,
-        id: str,
-        username: str,
-        hashed_password: str,
+        id: Optional[str]=None,
+        username: Optional[str]=None,
+        password:Optional[str]=None,
+        hashed_password: Optional[str]=None,
         email: Optional[str] = None,
         roleId: Optional[int] = None,
         createDate: Optional[datetime] = None,
@@ -16,6 +17,7 @@ class User:
     ):
         self.id = id
         self.username = username
+        self.password = password
         self.hashed_password = hashed_password
         self.email = email
         self.roleId = roleId
