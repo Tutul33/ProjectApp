@@ -9,7 +9,7 @@ class UserResponse(BaseModel):
     roleId: Optional[str] = None
     createDate: datetime
     isActive: bool
-
+    roleName: Optional[str]
     model_config = {
         "from_attributes": True  # replaces orm_mode in Pydantic v1
     }

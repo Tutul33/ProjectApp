@@ -20,7 +20,7 @@ class IUserRepository(ABC):
         pass
     
     @abstractmethod
-    async def list_users( self, page: int = 1, page_size: int = 10, sort_field: str = "name", ascending: bool = True) -> Dict[str, any]:
+    async def list_users( self, page: int = 1, page_size: int = 10, sort_field: str = "username", ascending: bool = True) -> Dict[str, any]:
         """Fetch all users."""
         pass
 

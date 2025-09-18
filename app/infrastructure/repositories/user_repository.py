@@ -1,7 +1,9 @@
-from typing import List, Optional
-from sqlalchemy import asc, desc, select
+from typing import Optional
+from sqlalchemy import asc, desc, func, select
+from app.domain.entities.role import Role
 from app.infrastructure.db.base import async_session
 from app.infrastructure.db.models.user import User as UserModel
+from app.infrastructure.db.models.role import Role as RoleModel
 from app.infrastructure.interfaces.i_user_repository import IUserRepository
 from app.domain.entities.user import User
 from app.core.security import hash_password
@@ -44,29 +46,70 @@ class UserRepository(IUserRepository):
                 return None
             return User(id=db_user.id, username=db_user.username, hashed_password=db_user.hashed_password, email=db_user.email)
 
-    async def list_users(
-        self, page: int, page_size: int, sort_field: str, ascending: bool
-    ) -> dict:
-        async with async_session() as session:
-            # Sorting
-            order_by = asc(getattr(UserModel, sort_field)) if ascending else desc(getattr(UserModel, sort_field))
+    # async def list_users(
+    #     self, page: int, page_size: int, sort_field: str, ascending: bool
+    # ) -> dict:
+    #     async with async_session() as session:
+    #         # Sorting
+    #         order_by = asc(getattr(UserModel, sort_field)) if ascending else desc(getattr(UserModel, sort_field))
 
-            # Query with pagination
-            stmt = select(UserModel).order_by(order_by).offset((page - 1) * page_size).limit(page_size)
-            result = await session.execute(stmt)
-            db_users = result.scalars().all()
+    #         # Query with pagination
+    #         stmt = select(UserModel).order_by(order_by).offset((page - 1) * page_size).limit(page_size)
+    #         result = await session.execute(stmt)
+    #         db_users = result.scalars().all()
 
-            # Count total records
-            total = (await session.execute(select(UserModel))).scalars().all()
-            total_count = len(total)
+    #         # Count total records
+    #         total = (await session.execute(select(UserModel))).scalars().all()
+    #         total_count = len(total)
 
-            return {
-                "total": total_count,
-                "data": [
-                    User(id=u.id, username=u.username, hashed_password=u.hashed_password, email=u.email)
-                    for u in db_users
-                ],
-            }
+    #         return {
+    #             "total": total_count,
+    #             "data": [
+    #                 User(id=u.id, username=u.username, hashed_password=u.hashed_password, email=u.email)
+    #                 for u in db_users
+    #             ],
+    #         }
+
+
+    async def list_users(self, page: int, page_size: int, sort_field: str, ascending: bool) -> dict:
+      async with async_session() as session:
+        # Sorting
+        order_by = asc(getattr(UserModel, sort_field)) if ascending else desc(getattr(UserModel, sort_field))
+        print("B4RolesWithUsers:")
+        # Query with JOIN
+        stmt = (
+            select(UserModel, RoleModel.name.label("roleName"))
+            .join(RoleModel, UserModel.roleId == RoleModel.id)
+            .order_by(order_by)
+            .offset((page - 1) * page_size)
+            .limit(page_size)
+        )
+
+        result = await session.execute(stmt)
+        rows = result.all()  # [(UserModel, roleName), ...]
+        #print("RolesWithUsers:",rows)
+        # Count total
+        total_stmt = select(func.count()).select_from(UserModel)
+        total_result = await session.execute(total_stmt)
+        total_count = total_result.scalar_one()
+
+        # Convert to Domain Entities (including roleName)
+        users = []
+        for user_model, role_name in rows:
+            users.append(
+                User(
+                    id=user_model.id,
+                    username=user_model.username,
+                    hashed_password=user_model.hashed_password,
+                    email=user_model.email,
+                    roleId=user_model.roleId,
+                    createDate=user_model.createDate,
+                    isActive=user_model.isActive,
+                    roleName=role_name,  # ✅ Add role name here
+                )
+            )
+
+        return {"total": total_count, "data": users}
 
     async def get_by_username_or_email(self, username: Optional[str] = None, email: Optional[str] = None) -> Optional[User]:
         async with async_session() as session:

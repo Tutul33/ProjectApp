@@ -42,6 +42,7 @@ class UserService(IUserService):
         """
         Returns paginated list of users
         """
+        print("Inservice1")
         result = await self.repo.list_users(page, page_size, sort_field, ascending)
         print("Inservice",result)
         return {

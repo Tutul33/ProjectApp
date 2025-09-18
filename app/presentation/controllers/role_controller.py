@@ -28,12 +28,6 @@ async def get_user(
         raise HTTPException(status_code=404, detail="Role not found")
     return wrap_response(data=role)
 
-
-# @router.get("/")
-# async def list_roles(role_service: RoleService = Depends(get_role_service)):
-#     """Fetch all roles"""
-#     role =  await role_service.list_roles()
-#     return wrap_response(data=role)
 @router.get("/")
 async def list_roles(
     page: int = Query(1, ge=1, description="Page number"),
