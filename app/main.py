@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from app.core.middlewares.exception_handler import global_exception_handler
 #from app.core.middlewares.response_middleware import ResponseWrapperMiddleware
-from app.presentation.controllers import login_controller, user_controller
+from app.presentation.controllers import login_controller, role_controller, user_controller
 from app.infrastructure.db.base import Base, engine
 import logging
 from app.config import settings
@@ -44,3 +44,4 @@ def root():
 # Include routers
 app.include_router(login_controller.router, prefix="/api/auth", tags=["Auth"])
 app.include_router(user_controller.router, prefix="/api/user", tags=["User"])
+app.include_router(role_controller.router, prefix="/api/role", tags=["Role"])

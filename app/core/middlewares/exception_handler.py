@@ -2,12 +2,12 @@
 from fastapi import Request
 from fastapi.responses import JSONResponse
 from app.utilities.common_response import APIResponse
-from app.domain.exceptions.user_exceptions import UserAlreadyExistsException
+from app.domain.exceptions.already_exist_exceptions import AlreadyExistsException
 from fastapi import HTTPException
 
 async def global_exception_handler(request: Request, exc: Exception):
-    if isinstance(exc, UserAlreadyExistsException):
-        response = APIResponse(success=False, message="User already exists", errors=str(exc))
+    if isinstance(exc, AlreadyExistsException):
+        response = APIResponse(success=False, message="Already exists", errors=str(exc))
         return JSONResponse(status_code=400, content=response.model_dump())
     
     if isinstance(exc, HTTPException):

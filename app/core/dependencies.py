@@ -1,15 +1,14 @@
+# app/core/dependencies.py
+from app.core.di_container import container
 from app.application.services.login_service import LoginService
 from app.application.services.user_service import UserService
-from app.infrastructure.interfaces.i_user_repository import IUserRepository
-from app.infrastructure.repositories.login_repository import LoginRepository
-from app.infrastructure.interfaces.i_login_repository import ILoginRepository
-from app.infrastructure.repositories.user_repository import UserRepository
+from app.application.services.role_service import RoleService
 
 def get_login_service() -> LoginService:
-    repo: ILoginRepository = LoginRepository()
-    service = LoginService(repo)
-    return service
+    return container.resolve(LoginService)
+
 def get_user_service() -> UserService:
-    repo: IUserRepository = UserRepository()
-    service = UserService(repo)
-    return service
+    return container.resolve(UserService)
+
+def get_role_service() -> RoleService:
+    return container.resolve(RoleService)

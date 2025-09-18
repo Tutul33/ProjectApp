@@ -6,7 +6,7 @@ from app.domain.dtos.user.UserResponse import UserResponse
 from app.domain.interfaces.i_user_service import IUserService
 from app.infrastructure.interfaces.i_user_repository import IUserRepository
 from app.application.mappers.user_mapper import entity_to_response, entities_to_responses
-from app.domain.exceptions.user_exceptions import UserAlreadyExistsException
+from app.domain.exceptions.already_exist_exceptions import AlreadyExistsException
 
 class UserService(IUserService):
     """Concrete implementation of IUserService"""
@@ -21,7 +21,7 @@ class UserService(IUserService):
             email=user_data.email
         )
         if existing:
-            raise UserAlreadyExistsException(f"Username or email already taken: {user_data.username}")
+            raise AlreadyExistsException(f"Username or email already taken: {user_data.username}")
 
         user: User = await self.repo.add_user(user_data)
         return entity_to_response(user)
