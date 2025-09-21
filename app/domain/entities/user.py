@@ -12,6 +12,7 @@ class User:
         hashed_password: Optional[str]=None,
         email: Optional[str] = None,
         roleId: Optional[int] = None,
+        roleName: Optional[str] = None,
         createDate: Optional[datetime] = None,
         isActive: bool = True
     ):
@@ -21,5 +22,6 @@ class User:
         self.hashed_password = hashed_password
         self.email = email
         self.roleId = roleId
+        self.roleName = roleName
         self.createDate = createDate or datetime.now(timezone.utc)  # timezone-aware UTC
         self.isActive = isActive

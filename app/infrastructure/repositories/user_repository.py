@@ -16,19 +16,19 @@ class UserRepository(IUserRepository):
          async with async_session() as session:
           new_id = str(uuid.uuid4())  # ✅ Generate GUID
 
-         db_user = UserModel(
+          db_user = UserModel(
             id=new_id,   # assign GUID here
             username=user_data.username,
             hashed_password=hash_password(user_data.password),
             email=user_data.email,
             roleId=user_data.roleId,
             isActive=user_data.isActive
-         )
-         session.add(db_user)
-         await session.commit()
-         await session.refresh(db_user)
+          )
+          session.add(db_user)
+          await session.commit()
+          await session.refresh(db_user)
 
-         return User(
+          return User(
             id=db_user.id,
             username=db_user.username,
             hashed_password=db_user.hashed_password,
@@ -36,7 +36,7 @@ class UserRepository(IUserRepository):
             roleId=db_user.roleId,
             createDate=db_user.createDate,
             isActive=db_user.isActive
-        )
+          )
          
     async def get_by_id(self, user_id: int) -> Optional[User]:
         async with async_session() as session:
@@ -45,31 +45,6 @@ class UserRepository(IUserRepository):
             if not db_user:
                 return None
             return User(id=db_user.id, username=db_user.username, hashed_password=db_user.hashed_password, email=db_user.email)
-
-    # async def list_users(
-    #     self, page: int, page_size: int, sort_field: str, ascending: bool
-    # ) -> dict:
-    #     async with async_session() as session:
-    #         # Sorting
-    #         order_by = asc(getattr(UserModel, sort_field)) if ascending else desc(getattr(UserModel, sort_field))
-
-    #         # Query with pagination
-    #         stmt = select(UserModel).order_by(order_by).offset((page - 1) * page_size).limit(page_size)
-    #         result = await session.execute(stmt)
-    #         db_users = result.scalars().all()
-
-    #         # Count total records
-    #         total = (await session.execute(select(UserModel))).scalars().all()
-    #         total_count = len(total)
-
-    #         return {
-    #             "total": total_count,
-    #             "data": [
-    #                 User(id=u.id, username=u.username, hashed_password=u.hashed_password, email=u.email)
-    #                 for u in db_users
-    #             ],
-    #         }
-
 
     async def list_users(self, page: int, page_size: int, sort_field: str, ascending: bool) -> dict:
       async with async_session() as session:
@@ -87,12 +62,12 @@ class UserRepository(IUserRepository):
 
         result = await session.execute(stmt)
         rows = result.all()  # [(UserModel, roleName), ...]
-        #print("RolesWithUsers:",rows)
+        print("RolesWithUsers:",rows)
         # Count total
         total_stmt = select(func.count()).select_from(UserModel)
         total_result = await session.execute(total_stmt)
         total_count = total_result.scalar_one()
-
+        print("WithUsersRoleName:",rows)
         # Convert to Domain Entities (including roleName)
         users = []
         for user_model, role_name in rows:

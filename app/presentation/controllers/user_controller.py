@@ -38,7 +38,7 @@ async def get_user(
 async def list_users(
     page: int = Query(1, ge=1, description="Page number"),
     page_size: int = Query(10, ge=1, le=100, description="Items per page"),
-    sort_field: str = Query("name", description="Field to sort by"),
+    sort_field: str = Query("username", description="Field to sort by"),
     ascending: bool = Query(True, description="Sort ascending?"),
     user_service: UserService = Depends(get_user_service)
 ):
