@@ -83,7 +83,8 @@ cd ProejctApp
 python -m venv venv
 source venv/bin/activate  # Linux/macOS
 venv\Scripts\activate     # Windows
-
+# & F:/PythonApp/ProjectApp/.venv/Scripts/Activate.ps1
+# uvicorn app.main:app --reload --port 8000
 # Install dependencies
 pip install -r requirements.txt
 
