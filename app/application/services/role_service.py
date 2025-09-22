@@ -19,13 +19,13 @@ class RoleService(IRoleService):
         if existing:
             raise AlreadyExistsException(f"Role Name already taken: {role_data.name}")
 
-        # DTO → Domain Entity
+        # DTO -> Domain Entity
         role_entity: Role = map_to_entity(Role, role_data)
 
         # Persist domain entity
         saved_role: Role = await self.repo.add_role(role_entity)
 
-        # Domain Entity → DTO
+        # Domain Entity -> DTO
         return map_to_dto(RoleResponse, saved_role)
 
     async def get_role_by_id(self, role_id: int) -> Optional[RoleResponse]:
